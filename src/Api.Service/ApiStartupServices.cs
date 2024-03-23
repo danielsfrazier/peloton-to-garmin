@@ -19,6 +19,9 @@ public static class ApiStartupServices
 {
 	public static void ConfigureP2GApiServices(this IServiceCollection services)
 	{
+		// HOSTED SERVICES
+		services.AddHostedService<BackgroundSyncJob>();
+
 		// CACHE
 		services.AddSingleton<IMemoryCache, MemoryCache>();
 
@@ -41,6 +44,7 @@ public static class ApiStartupServices
 		// PELOTON
 		services.AddSingleton<IPelotonApi, Peloton.ApiClient>();
 		services.AddSingleton<IPelotonService, PelotonService>();
+		services.AddSingleton<IPelotonAnnualChallengeService, PelotonAnnualChallengeService>();
 		services.AddSingleton<IAnnualChallengeService, AnnualChallengeService>();
 
 		// RELEASE CHECKS
